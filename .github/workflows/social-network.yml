@@ -7,9 +7,6 @@ jobs:
       postgres:
         image: postgres
         ports: ['5432:5432']
-        env:
-          POSTGRES_USER: social_network
-          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -34,9 +31,10 @@ jobs:
       - name: Set up database
         run: bundle exec rails db:prepare
         env:
-           SOCIAL_NETWORK_DATABASE_PASSWORD: postgres
+           DATABASE_URL: postgres://postgres:@localhost:5432/social_network_test
+           RAILS_ENV: test
       - name: Run tests
         run: bundle exec rails test
         env:
            RAILS_ENV: test
-           SOCIAL_NETWORK_DATABASE_PASSWORD: postgres
+           DATABASE_URL: postgres://postgres:@localhost:5432/social_network_test
