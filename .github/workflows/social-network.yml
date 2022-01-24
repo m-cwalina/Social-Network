@@ -6,9 +6,9 @@ jobs:
     services:
       postgres:
         image: postgres
-        ports: ['3000:3000']
+        ports: ['5432:5432']
         env:
-          POSTGRES_USER: social_network_development
+          POSTGRES_USER: social_network
           POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
