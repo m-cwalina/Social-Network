@@ -17,7 +17,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2git
+        uses: actions/checkout@v1git
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
