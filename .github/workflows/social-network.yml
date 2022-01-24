@@ -4,9 +4,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     services:
-      db:
+      postgres:
         image: postgres
         ports: ['5432:5432']
+        env:
+          POSTGRES_USER: social_network
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -31,10 +34,9 @@ jobs:
       - name: Set up database
         run: bundle exec rails db:prepare
         env:
-           DATABASE_URL: postgres://postgres:@localhost:5432/social_network_test
-           RAILS_ENV: test
+           SOCIAL_NETWORK_DATABASE_PASSWORD: postgres
       - name: Run tests
         run: bundle exec rails test
         env:
            RAILS_ENV: test
-           DATABASE_URL: postgres://postgres:@localhost:5432/social_network_test
+           SOCIAL_NETWORK_DATABASE_PASSWORD: postgres
